@@ -27,6 +27,6 @@ jobs:
           install -m 600 -D /dev/null ~/.ssh/id_rsa
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan -H "${{ secrets.SSH_HOST }}" > ~/.ssh/known_hosts
-          ssh -tt root@${{ secrets.SSH_HOST }} "docker pull ${{ env.IMAGE_NAME }}:latest && docker run -p 3000:80 ${{ env.IMAGE_NAME }}:latest"
+          ssh -tt root@${{ secrets.SSH_HOST }} "docker pull ${{ env.IMAGE_NAME }}:latest && docker run -d -p 3000:80 ${{ env.IMAGE_NAME }}:latest"
       - name: Cleanup
         run: rm -rf ~/.ssh
